@@ -1,0 +1,15 @@
+{
+  "name": "googlesheet_api_tester",
+  "version": "1.0.0",
+  "description": "A demo api created to create and edit google spreadSheet along with delete, add and edit data in already presented sheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hardik Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^67.0.0",
+    "nodemon": "^2.0.7"
+  }
+}
