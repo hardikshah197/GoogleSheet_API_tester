@@ -22,4 +22,5 @@ jobs:
         uses: github/super-linter@v3
         env:
           DEFAULT_BRANCH: main
+          VALIDATE_ALL_CODEBASE: false
           GITHUB_TOKEN: ${3f763da47a7098e5e73ddff5911e4388c525d871}
