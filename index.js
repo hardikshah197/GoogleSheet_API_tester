@@ -1,8 +1,46 @@
 const fs= require('fs');
 const {google} = require('googleapis');
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 const old_token = "ya29.A0AfH6SMBRzHBdDHS94owpxLZuUAHrrgNxS7L_DwQpB5M_WXznj-JxhLtGu4OKDJP59laFoh_1uQr8m09vTTPaFmxTNsLRg4eiD0nnqq2u5Qz911GPWGZdR7AQt-qMf-QTFgSWrewEtuvMolDGB4Hm7AovEo_l";
-const new_token = "ya29.a0AfH6SMBAgDG-MneTlBe4v4NNVolLtGSxAAhXCi2JRnq4gTVTfK3XTZaEEAtWJXKL9Kx2MRrZ5r2Cdjd3S4AqlYVQtCyd449IO4Ge0Klub1r3cbKICVYhFPhfe48ITxlhI4P_hL-nRnqF65a7De1VH15b-A_fSi9BsLOuBzC-mlM";
+const new_token = "ya29.A0AfH6SMArkcUafDBbBfwQ7yKhbLtrAUNYC1QHwkMgsM1g2qJyEagHh12Do1u2RCAJ-hWz8K1YQyE6ba_fiqltUXbZaX-tD-g0wJn8_ov5LXdO6ow04xpHY3MDvqZ3uPxx-mkLBwT3PCnWOBf3-JCxcjYf_Y5ypQ";
 const bad_token = "bad_toke";
+let GSid = "";
+const data = {
+  "name": [
+    "nitesh",
+    "anmol",
+    "test",
+    "dfdfdf"
+  ],
+  "email": [
+    "dffd@m",
+    "hello@gmail",
+    "hut@gmail",
+    "sexy@hotmail"
+  ],
+  "skills": [
+    {
+      "java": 0,
+      "aws": true,
+      "python": 0
+    },
+    {
+      "java": true,
+      "aws": 0,
+      "python": true
+    },
+    {
+      "java": true,
+      "aws": false,
+      "python": false
+    },
+    {
+      "java": true,
+      "aws": 0,
+      "python": 0
+    }
+  ]
+};
 
 fs.readFile('./credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
@@ -61,8 +99,27 @@ function createSheet(auth) {
       // Handle error.
       console.log(err);
     } else {
+      GSid = spreadsheet.data.spreadsheetId;
       console.log(`Spreadsheet ID: ${spreadsheet.data.spreadsheetId}`);
+      AddDataToSheet(auth)
     }
   });
 }
 
+async function AddDataToSheet(oauth2Client){
+  const doc = new GoogleSpreadsheet(GSid);
+  doc.useOAuth2Client(oauth2Client);
+  await doc.loadInfo();
+  console.log(`Title: ${doc.title}`);
+
+  const sheet = await doc.addSheet({ headerValues: ['Name', 'Email', 'Skills'] });
+  for(var i=0;i<data.name.length;i++){
+    var count = 0;
+    for(var x in data.skills[i]){
+      if(x) count++;
+    }
+    await sheet.addRow({ Name: data.name[i] , Email: data.email[i], Skills: count });
+  }
+  const rows = await sheet.getRows();
+  console.log("New Sheet rows: ",rows[0]);
+}
