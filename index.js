@@ -18,27 +18,27 @@ const data = {
     "hut@gmail",
     "sexy@hotmail"
   ],
-  "skills": [
-    {
-      "java": 0,
-      "aws": true,
-      "python": 0
-    },
-    {
-      "java": true,
-      "aws": 0,
-      "python": true
-    },
-    {
-      "java": true,
-      "aws": false,
-      "python": false
-    },
-    {
-      "java": true,
-      "aws": 0,
-      "python": 0
-    }
+  // "skills": [
+  //   {
+  //     "java": 0,
+  //     "aws": true,
+  //     "python": 0
+  //   },
+  //   {
+  //     "java": true,
+  //     "aws": 0,
+  //     "python": true
+  //   },
+  //   {
+  //     "java": true,
+  //     "aws": false,
+  //     "python": false
+  //   },
+  //   {
+  //     "java": true,
+  //     "aws": 0,
+  //     "python": 0
+  //   }
   ]
 };
 
